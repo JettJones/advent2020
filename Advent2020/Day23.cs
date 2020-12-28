@@ -99,7 +99,7 @@ namespace Advent2020
         }
         private List<int> LinkDance(int moves, List<int> order)
         {
-            // Because CrabDance is slow when finding a number, a reimplementation with linked list and value index.
+            // Because CrabDance is slow from List.Find, a reimplementation with linked list and value index.
             int cupCount = order.Count;
             CircleLink<int> cups = new CircleLink<int>(order);
             CircleNode<int>[] tmp = new CircleNode<int>[3];

@@ -2,7 +2,7 @@
   "profiles": {
     "Advent2020": {
       "commandName": "Project",
-      "commandLineArgs": "23b",
+      "commandLineArgs": "19b",
       "workingDirectory": "./input/"
     }
   }

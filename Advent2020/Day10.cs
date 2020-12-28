@@ -17,7 +17,7 @@ namespace Advent2020
             return JoltPossibles(input);
         }
 
-        // too low: 2070
+        // too low: 2070 - forgot to include 0.
         public int JoltDifferences(IEnumerable<string> input)
         {
             List<int> values = input.Select(s => Int32.Parse(s)).ToList();

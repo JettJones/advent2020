@@ -95,22 +95,78 @@ namespace Advent2020
 
         public object SolveA(IEnumerable<string> input)
         {
-            return MatchRule(input, 0);
+            return MatchRule(input);
         }
 
         public object SolveB(IEnumerable<string> input)
         {
-            throw new NotImplementedException();
+            return MatchModified(input);
         }
 
         private ListRule ToListRule(string s)
         {
             return new ListRule(s.Split(" ").Select(Int32.Parse));
         }
-        private int MatchRule(IEnumerable<string> input, int ruleNo = 0)
+
+        private int MatchModified(IEnumerable<string> input)
         {
-            Dictionary<int, IRule> rules = new Dictionary<int, IRule>();
-            List<string> strings = new List<string>();
+            Dictionary<int, IRule> rules;
+            List<string> strings;
+            MyParse(input, out rules, out strings);
+
+            // Change the definition of 8 and 11.
+            var r8 = new List<IRule>()
+            {
+                new ListRule(new int[]{42}),
+                new ListRule(new int[]{42, 8}),
+            };
+            rules[8] = new OrRule(r8);
+
+            var r11 = new List<IRule>()
+            {
+                new ListRule(new int[]{42, 31}),
+                new ListRule(new int[]{42, 11, 31}),
+            };
+
+            rules[11] = new OrRule(r11);
+
+            int success = CountRule0Matches(rules, strings);
+
+            return success;
+        }
+
+        private int MatchRule(IEnumerable<string> input)
+        {
+            Dictionary<int, IRule> rules;
+            List<string> strings;
+            MyParse(input, out rules, out strings);
+
+            int success = CountRule0Matches(rules, strings);
+
+            return success;
+        }
+
+        private static int CountRule0Matches(Dictionary<int, IRule> rules, List<string> strings)
+        {
+            IRule r0 = rules[0];
+
+            int success = 0;
+
+            foreach (string ins in strings)
+            {
+                var matches = r0.Match(rules, ins);
+                if (matches.Where(m => m.Length == ins.Length).Count() > 0)
+                {
+                    success++;
+                }
+            }
+
+            return success;
+        }
+        private void MyParse(IEnumerable<string> input, out Dictionary<int, IRule> rules, out List<string> strings)
+        {
+            rules = new Dictionary<int, IRule>();
+            strings = new List<string>();
             bool startStrings = false;
             foreach (string s in input)
             {
@@ -147,23 +203,6 @@ namespace Advent2020
                     }
                 }
             }
-
-            IRule r0 = rules[0];
-
-            int success = 0;
-
-            foreach(string ins in strings)
-            {
-                var matches = r0.Match(rules, ins);
-                if (matches.Where(m => m.Length == ins.Length).Count() > 0)
-                {
-                    success++;
-                }
-            }
-
-            return success;
         }
-
-
     }
 }

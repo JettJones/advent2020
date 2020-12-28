@@ -32,7 +32,6 @@ namespace Advent2020
         }
 
 
-        // low: 7471564075
         private long SumMaths2(IEnumerable<string> input)
         {
             long total = 0;

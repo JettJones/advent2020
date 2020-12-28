@@ -169,7 +169,7 @@ namespace Advent2020
         private Layout OneGeneration(Layout start)
         {
             Layout next = start.Clone();
-            // for easy equality, return the starting value if anything is different.
+            // for easy equality, return the starting value if nothing is different.
             int changeCount = 0;
 
             for (int ir = 0; ir < start.RowCount; ir++)
@@ -203,7 +203,7 @@ namespace Advent2020
         private Layout OneGenerationComplex(Layout start)
         {
             Layout next = start.Clone();
-            // for easy equality, return the starting value if anything is different.
+            // for easy equality, return the starting value if nothing is different.
             int changeCount = 0;
 
             for (int ir = 0; ir < start.RowCount; ir++)
