@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Advent2020": {
+      "commandName": "Project",
+      "commandLineArgs": "23b",
+      "workingDirectory": "./input/"
+    }
+  }
+}
